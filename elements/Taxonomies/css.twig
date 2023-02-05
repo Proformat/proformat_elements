@@ -1,0 +1,31 @@
+%%SELECTOR%% {
+  background-color: {{ design.container.background }};
+  {{ macros.spacing_padding_all(design.container.padding) }}
+  {{ macros.borders(design.container.borders) }}
+  {{ macros.spacing_margin_y(design.spacing) }}
+}
+
+%%SELECTOR%% .taxonomies-container {
+  gap: {{ design.layout.gap.style }};
+  flex-wrap: wrap;
+}
+
+%%SELECTOR%% .taxonomies-container li {
+  background-color: {{ design.single_element.background }};
+  {{ macros.spacing_padding_all(design.single_element.padding) }}
+  {{ macros.borders(design.single_element.borders) }}
+}
+
+%%SELECTOR%% .taxonomies-container li a {
+   {{ macros.typography(design.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .taxonomies-container li a:hover {
+  {{ macros.typographyWithHoverableColorAndEffects(design.typography) }}
+}
+
+{% if design.layout.position == 'Vertical' %}
+%%SELECTOR%% .taxonomies-container {
+  flex-direction:column;
+}
+{% endif %}

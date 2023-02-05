@@ -16,3 +16,4 @@ $nameas = (string) ($propertiesData['content']['content']['display_name_as'] ?? 
 ) ); ?>
 </ul>
 <?php }
+
