@@ -12,9 +12,12 @@
  * Version: 0.0.1
  */
 
+
 namespace BreakdanceCustomElements;
 
 use function Breakdance\Util\getDirectoryPathRelativeToPluginFolder;
+
+require 'src/bd_conditions.php';
 
 add_action('breakdance_loaded', function () {
     \Breakdance\ElementStudio\registerSaveLocation(

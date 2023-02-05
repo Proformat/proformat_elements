@@ -1,0 +1,14 @@
+.breakdance .bce-polylang-languages {
+  max-width:100%
+}
+.breakdance .bce-polylang-languages ul {
+display:flex;
+gap:10px;
+margin:0;
+padding:0;
+}
+.breakdance .bce-polylang-languages .lang-item {
+  display:inline;
+  list-style:none;
+  line-height:1;
+}
