@@ -45,7 +45,7 @@ class PolylangLanguages extends \Breakdance\Elements\Element
 
     static function category()
     {
-        return 'other';
+        return 'proformat_elements';
     }
 
     static function badge()

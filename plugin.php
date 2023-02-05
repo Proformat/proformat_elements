@@ -19,7 +19,18 @@ use function Breakdance\Util\getDirectoryPathRelativeToPluginFolder;
 
 require 'src/bd_conditions.php';
 
-add_action('breakdance_loaded', function () {
+defined( 'ABSPATH' ) or die( 'you do not have access to this page!' );
+define( 'ELEMENTS_HIVE_DIR', plugin_dir_url( __FILE__ ) );
+
+function register_plugin_categories() {
+
+	\Breakdance\Elements\ElementCategoriesController::getInstance()->registerCategory( 'proformat_elements', 'Proformat' );
+
+}
+
+
+function register_save_locations() {
+
     \Breakdance\ElementStudio\registerSaveLocation(
         getDirectoryPathRelativeToPluginFolder(__DIR__) . '/elements',
         'ProformatCustomElements',
@@ -43,7 +54,19 @@ add_action('breakdance_loaded', function () {
         'Proformat Presets',
         false,
     );
-},
-    // register elements before loading them
-    9
+}
+
+add_action('breakdance_loaded',
+	function () {
+
+		register_save_locations();
+
+		register_plugin_categories();
+
+		require_once __DIR__ . '/extensions/base.php';
+
+		require_once __DIR__ . '/includes/twig_functions.php';
+
+	},
+	9
 );

@@ -1,0 +1,31 @@
+%%SELECTOR%%  {
+  {{ macros.spacing_margin_y(design.spacing) }}
+  max-width: 100%;
+{% if not design.media.width.style %}
+  	width: 100%;
+  {% else %}
+  	width: {{ design.media.width.style }};
+  {% endif %}
+ position: relative;
+}
+
+%%SELECTOR%% img,
+%%SELECTOR%% video {
+  display: block;
+  width: 100%;
+  {{ macros.border_radius(design.media.border_radius) }}
+  {% if not design.media.height.style %}
+  	height: auto;
+  {% else %}
+  	height: {{ design.media.height.style }};
+  {% endif %}
+  visibility: hidden;
+}
+ 
+%%SELECTOR%% canvas {
+position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  {{ macros.border_radius(design.media.border_radius) }}
+}
