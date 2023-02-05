@@ -5,3 +5,17 @@
   {{ macros.spacing_all(design.kontener.spacing) }}
   {{ macros.borders(design.kontener.borders) }}
 }
+
+%%SELECTOR%% .readmore-primary-text, %%SELECTOR%% .readmore-expanded-text{
+{{ macros.typography(design.tre_.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .maria {
+{{ macros.spacing_all(design.przycisk.spacing_all) }}
+}
+
+
+%%SELECTOR%% p {
+  margin-block-start: {{ design.tre_.paragraph_margin_top.style }};
+  margin-block-end: {{ design.tre_.paragraph_margin_bottom.style }};
+}

@@ -110,27 +110,30 @@ class ReadMore extends \Breakdance\Elements\Element
         false,
         [],
       ), c(
-        "tre_podstawowa",
-        "Treść podstawowa",
+        "tre_",
+        "Treść",
         [getPresetSection(
       "EssentialElements\\typography",
       "Typography",
       "typography",
        ['type' => 'popout']
-     )],
-        ['type' => 'section'],
+     ), c(
+        "paragraph_margin_top",
+        "Paragraph Margin Top",
+        [],
+        ['type' => 'unit', 'layout' => 'inline'],
         false,
         false,
         [],
       ), c(
-        "tre_po_rozwini_ciu",
-        "Treść po rozwinięciu",
-        [getPresetSection(
-      "EssentialElements\\typography",
-      "Typography",
-      "typography",
-       ['type' => 'popout']
-     )],
+        "paragraph_margin_bottom",
+        "Paragraph Margin Bottom",
+        [],
+        ['type' => 'unit', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+      )],
         ['type' => 'section'],
         false,
         false,
@@ -142,6 +145,11 @@ class ReadMore extends \Breakdance\Elements\Element
       "EssentialElements\\AtomV1ButtonDesign",
       "Button",
       "button",
+       ['type' => 'popout']
+     ), getPresetSection(
+      "EssentialElements\\spacing_all",
+      "Spacing (All)",
+      "spacing_all",
        ['type' => 'popout']
      )],
         ['type' => 'section'],
@@ -252,7 +260,7 @@ class ReadMore extends \Breakdance\Elements\Element
 
     static function propertyPathsToWhitelistInFlatProps()
     {
-        return ['content.tre_.button.custom.size.full_width_at', 'content.tre_.styles.styles.size.full_width_at', 'content.tre_.styles.styles', 'design.przycisk.style_przycisku.styles.size.full_width_at', 'design.przycisk.button.custom.size.full_width_at', 'design.przycisk.button.styles', 'design.kontener.layout.horizontal.vertical_at'];
+        return ['content.tre_.button.custom.size.full_width_at', 'content.tre_.styles.styles.size.full_width_at', 'content.tre_.styles.styles', 'design.przycisk.style_przycisku.styles.size.full_width_at', 'design.kontener.layout.horizontal.vertical_at', 'design.przycisk.button.custom.size.full_width_at', 'design.przycisk.button.styles'];
     }
 
     static function propertyPathsToSsrElementWhenValueChanges()
