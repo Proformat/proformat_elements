@@ -102,66 +102,6 @@ class PostTable extends \Breakdance\Elements\Element
       )];
     }
 
-    static function contentControls()
-    {
-        return [c(
-        "table",
-        "Table",
-        [c(
-        "post_type",
-        "Post Type",
-        [],
-        ['type' => 'text', 'layout' => 'vertical'],
-        false,
-        false,
-        [],
-      ), c(
-        "posts_number",
-        "Posts number",
-        [],
-        ['type' => 'number', 'layout' => 'vertical'],
-        false,
-        false,
-        [],
-      ), c(
-        "columns",
-        "Columns",
-        [c(
-        "new_control",
-        "New Control",
-        [],
-        ['type' => 'alert_box', 'layout' => 'vertical', 'alertBoxOptions' => ['style' => 'info', 'content' => '<p>Enter metabox custom field name or choose one from variables.</p>']],
-        false,
-        false,
-        [],
-      ), c(
-        "display",
-        "Display",
-        [],
-        ['type' => 'text', 'layout' => 'vertical'],
-        false,
-        false,
-        [],
-      ), c(
-        "property",
-        "Property",
-        [],
-        ['type' => 'text', 'layout' => 'vertical', 'variableOptions' => ['enabled' => true], 'variableItems' => ['0' => ['value' => 'ID', 'text' => 'Label', 'label' => 'ID'], '1' => ['label' => 'Post author', 'value' => 'post_author'], '2' => ['label' => 'Post date', 'value' => 'post_date'], '3' => ['label' => 'Post date (gmt)', 'value' => 'post_date_gmt'], '4' => ['label' => 'Post title', 'value' => 'post_title'], '5' => ['label' => 'Post excerpt', 'value' => 'post_excerpt']]],
-        false,
-        false,
-        [],
-      )],
-        ['type' => 'repeater', 'layout' => 'vertical'],
-        false,
-        false,
-        [],
-      )],
-        ['type' => 'section', 'layout' => 'vertical'],
-        false,
-        false,
-        [],
-      )];
-    }
 
     static function settingsControls()
     {
