@@ -146,7 +146,7 @@ class PostTable extends \Breakdance\Elements\Element
         "property",
         "Property",
         [],
-        ['type' => 'text', 'layout' => 'vertical', 'variableOptions' => ['enabled' => true], 'variableItems' => ['0' => ['value' => 'ID', 'text' => 'Label', 'label' => 'ID']]],
+        ['type' => 'text', 'layout' => 'vertical', 'variableOptions' => ['enabled' => true], 'variableItems' => ['0' => ['value' => 'ID', 'text' => 'Label', 'label' => 'ID'], '1' => ['label' => 'Post date', 'value' => 'post_date']]],
         false,
         false,
         [],
