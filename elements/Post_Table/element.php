@@ -130,7 +130,7 @@ class PostTable extends \Breakdance\Elements\Element
         "message",
         "Message",
         [],
-        ['type' => 'alert_box', 'layout' => 'vertical', 'alertBoxOptions' => ['style' => 'default', 'content' => '<p>Post object properties: ID, post_title, post_date, post_excerpt<br>Metabox: mb:fieldname<br>ACF: acf:fieldname</p>']],
+        ['type' => 'alert_box', 'layout' => 'vertical', 'alertBoxOptions' => ['style' => 'default', 'content' => '<p>Post object properties: {ID}, {post_title}, {post_date}, {post_excerpt}<br>Metabox: mb:fieldname<br>ACF: acf:fieldname</p>']],
         false,
         false,
         [],
@@ -143,8 +143,8 @@ class PostTable extends \Breakdance\Elements\Element
         false,
         [],
       ), c(
-        "get_property_",
-        "Get property ",
+        "property",
+        "Property",
         [],
         ['type' => 'text', 'layout' => 'vertical'],
         false,
@@ -190,7 +190,15 @@ class PostTable extends \Breakdance\Elements\Element
 
     static public function actions()
     {
-        return false;
+        return [
+
+'onMountedElement' => [['script' => 'jQuery(document).ready(function($) {
+
+        $(\'%%SELECTOR%% #myTable\').DataTable();
+        
+  });
+',
+],],];
     }
 
     static function nestingRule()
