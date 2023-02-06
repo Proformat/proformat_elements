@@ -102,6 +102,18 @@ class PostTable extends \Breakdance\Elements\Element
       )];
     }
 
+    static function contentControls()
+    {
+        return [c(
+        "post_table",
+        "Post Table",
+        [],
+        ['type' => 'section', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+      )];
+    }
 
     static function settingsControls()
     {
