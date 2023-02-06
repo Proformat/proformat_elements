@@ -3,6 +3,7 @@
 /**
  * Plugin Name: Proformat Custom Elements
  * Plugin URI: https://breakdance.com/
+ * Requires Plugins: advanced-custom-fields 
  * Description: ALPHA - NOT TO BE USED IN PRODUCTION
  * Author: Breakdance
  * Author URI: https://breakdance.com/
@@ -17,7 +18,10 @@ namespace BreakdanceCustomElements;
 
 use function Breakdance\Util\getDirectoryPathRelativeToPluginFolder;
 
-require 'src/bd_conditions.php';
+define('PROFORMAT_ELEMENTS_PLUGIN_DIR', plugin_dir_url(__FILE__));
+define('PROFORMAT_ELEMENTS_DIR', __DIR__);
+require PROFORMAT_ELEMENTS_DIR . '/src/bd_conditions.php';
+require PROFORMAT_ELEMENTS_DIR . '/includes/custom_posty_types.php';
 
 defined( 'ABSPATH' ) or die( 'you do not have access to this page!' );
 define( 'ELEMENTS_HIVE_DIR', plugin_dir_url( __FILE__ ) );
