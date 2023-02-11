@@ -91,8 +91,81 @@ class PostTable extends \Breakdance\Elements\Element
         "Typography",
         [getPresetSection(
       "EssentialElements\\typography_with_hoverable_color",
-      "Table headings",
-      "table_headings",
+      "Text",
+      "text",
+       ['type' => 'popout']
+     )],
+        ['type' => 'section'],
+        false,
+        false,
+        [],
+      ), c(
+        "form_elements",
+        "Form elements",
+        [getPresetSection(
+      "EssentialElements\\combined_design",
+      "Pagintation buttons",
+      "pagintation_buttons",
+       ['type' => 'popout']
+     )],
+        ['type' => 'section'],
+        false,
+        false,
+        [],
+      ), c(
+        "table",
+        "Table",
+        [],
+        ['type' => 'section'],
+        false,
+        false,
+        [],
+      ), c(
+        "table_head",
+        "Table head",
+        [getPresetSection(
+      "EssentialElements\\background",
+      "Background",
+      "background",
+       ['type' => 'popout']
+     ), getPresetSection(
+      "EssentialElements\\typography",
+      "Typography",
+      "typography",
+       ['type' => 'popout']
+     )],
+        ['type' => 'section'],
+        false,
+        false,
+        [],
+      ), c(
+        "table_row",
+        "Table row",
+        [c(
+        "odd_background",
+        "Odd background",
+        [],
+        ['type' => 'color', 'layout' => 'inline'],
+        false,
+        true,
+        [],
+      ), c(
+        "even_background",
+        "Even background",
+        [],
+        ['type' => 'color', 'layout' => 'inline'],
+        false,
+        true,
+        [],
+      ), getPresetSection(
+      "EssentialElements\\typography_with_hoverable_color",
+      "Typography",
+      "typography",
+       ['type' => 'popout']
+     ), getPresetSection(
+      "EssentialElements\\spacing_padding_y",
+      "Row padding",
+      "row_padding",
        ['type' => 'popout']
      )],
         ['type' => 'section'],
@@ -150,8 +223,40 @@ class PostTable extends \Breakdance\Elements\Element
         false,
         false,
         [],
+      ), c(
+        "width",
+        "Width",
+        [],
+        ['type' => 'unit', 'layout' => 'inline'],
+        false,
+        false,
+        [],
       )],
         ['type' => 'repeater', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+      ), c(
+        "show_id_column",
+        "Show ID column",
+        [],
+        ['type' => 'toggle', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+      ), c(
+        "show_actions",
+        "Show actions",
+        [],
+        ['type' => 'toggle', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+      ), c(
+        "action_buttons",
+        "Action buttons",
+        [],
+        ['type' => 'multiselect', 'layout' => 'vertical', 'items' => ['0' => ['value' => 'delete', 'text' => 'Delete'], '1' => ['text' => 'Edit', 'value' => 'edit'], '2' => ['text' => 'View', 'value' => 'view']], 'condition' => ['0' => ['0' => ['path' => 'content.post_table.show_actions', 'operand' => 'is set', 'value' => '']]]],
         false,
         false,
         [],
@@ -170,12 +275,12 @@ class PostTable extends \Breakdance\Elements\Element
 
     static function dependencies()
     {
-        return ['0' =>  ['scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/data-tables@1.13/datatables.min.js'],'inlineScripts' => ['jQuery(document).ready(function($) {
+        return ['0' =>  ['inlineScripts' => ['jQuery(document).ready(function($) {
 
         $(\'%%SELECTOR%% #myTable\').DataTable();
         
   });
-'],'styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/data-tables@1.13/datatables.min.css'],],];
+'],],];
     }
 
     static function settings()
@@ -228,7 +333,7 @@ class PostTable extends \Breakdance\Elements\Element
 
     static function dynamicPropertyPaths()
     {
-        return [];
+        return ['0' => ['accepts' => 'image_url', 'path' => 'design.table_head.background.layers[].image'], '1' => ['accepts' => 'image_url', 'path' => 'design.table_row.odd_background.layers[].image'], '2' => ['accepts' => 'image_url', 'path' => 'design.table_row.even_background.layers[].image']];
     }
 
     static function additionalClasses()
@@ -243,7 +348,7 @@ class PostTable extends \Breakdance\Elements\Element
 
     static function propertyPathsToWhitelistInFlatProps()
     {
-        return false;
+        return ['design.form_elements.layout.horizontal.vertical_at', 'design.table_row.background.image', 'design.table_row.background.overlay.image', 'design.table_row.background.image_settings.unset_image_at', 'design.table_row.background.image_settings.size', 'design.table_row.background.image_settings.height', 'design.table_row.background.image_settings.repeat', 'design.table_row.background.image_settings.position', 'design.table_row.background.image_settings.left', 'design.table_row.background.image_settings.top', 'design.table_row.background.image_settings.attachment', 'design.table_row.background.image_settings.custom_position', 'design.table_row.background.image_settings.width', 'design.table_row.background.overlay.image_settings.custom_position', 'design.table_row.background.image_size', 'design.table_row.background.overlay.image_size', 'design.table_row.background.overlay.type', 'design.table_row.background.design.layout.horizontal.vertical_at', 'design.table_row.background.image_settings', 'design.table.layout.horizontal.vertical_at'];
     }
 
     static function propertyPathsToSsrElementWhenValueChanges()

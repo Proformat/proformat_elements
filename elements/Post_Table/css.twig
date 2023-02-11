@@ -1,7 +1,70 @@
+{# Table HEAD #}
+
 %%SELECTOR%% th {
-  {{ macros.typography(design.typography.table_headings, globalSettings) }}
+  {{ macros.typography(design.table_head.typography, globalSettings) }}
 }
 
-%%SELECTOR%%:hover th {
-  {{ macros.typographyWithHoverableColorAndEffects(design.typography.table_headings) }}
+{# Table SURROUNDING #}
+
+%%SELECTOR%% .dataTables_length,
+%%SELECTOR%% .dataTables_filter,
+%%SELECTOR%% .dataTables_info
+{
+  {{ macros.typography(design.typography.text, globalSettings) }}
 }
+
+%%SELECTOR%% td:hover {
+  {{ macros.typographyWithHoverableColorAndEffects(design.typography.text) }}
+}
+
+
+{% if (content.post_table.show_id_column and design.table.id_col_width.style) %}
+%%SELECTOR%% .id-column {
+  width: 10px !important;
+}
+{% endif %}
+
+%%SELECTOR%% table.dataTable.stripe tbody tr.even, table.dataTable.display tbody tr.even,
+%%SELECTOR%% table.dataTable.display tbody tr.even>.sorting_1
+{
+  {{ macros.background(design.table_row.even_background) }}
+}
+
+
+%%SELECTOR%% table.dataTable.display{
+  {{ macros.typography(design.table_row.typography, globalSettings) }}
+}
+
+%%SELECTOR%% tr:hover {
+  {{ macros.typographyWithHoverableColorAndEffects(design.table_row.typography) }}
+}
+
+%%SELECTOR%% table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd,
+%%SELECTOR%% table.dataTable.display tbody tr.odd>.sorting_1
+{
+background-color: {{ design.table_row.odd_background }}
+}
+
+%%SELECTOR%% table.dataTable.stripe tbody tr.odd:hover, table.dataTable.display tbody tr.odd:hover,
+%%SELECTOR%% table.dataTable.display tbody tr.odd:hover>.sorting_1
+{
+background-color: {{ design.table_row.odd_background_hover }}
+}
+
+%%SELECTOR%% table.dataTable.stripe tbody tr.even, table.dataTable.display tbody tr.even,
+%%SELECTOR%% table.dataTable.display tbody tr.even>.sorting_1
+{
+background-color: {{ design.table_row.even_background }}
+}
+
+%%SELECTOR%% table.dataTable.stripe tbody tr.even:hover, table.dataTable.display tbody tr.even:hover,
+%%SELECTOR%% table.dataTable.display tbody tr.even:hover>.sorting_1
+{
+background-color: {{ design.table_row.even_background_hover }}
+}
+
+%%SELECTOR%% td {
+  {{ macros.spacing_padding_y(design.table_row.row_padding) }}
+}
+
+
