@@ -3,7 +3,10 @@
 function datatables_scripts_in_head()
 {
     wp_enqueue_script('datatables', 'https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js', array('jquery'));
-    wp_localize_script('datatables', 'datatablesajax', array('url' => admin_url('admin-ajax.php')));
+    wp_localize_script('datatables', 'datatablesajax', array(
+        'admin_ajax_url' => admin_url('admin-ajax.php'),
+        'plugin_url' => PROFORMAT_ELEMENTS_PLUGIN_DIR
+    ));
     wp_enqueue_style('datatables', 'https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css');
 }
 add_action('wp_enqueue_scripts', 'datatables_scripts_in_head');

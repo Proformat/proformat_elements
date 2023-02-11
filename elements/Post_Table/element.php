@@ -115,7 +115,33 @@ class PostTable extends \Breakdance\Elements\Element
       ), c(
         "table",
         "Table",
+        [c(
+        "width",
+        "Width",
         [],
+        ['type' => 'unit', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+      ), getPresetSection(
+      "EssentialElements\\borders",
+      "Borders",
+      "borders",
+       ['type' => 'popout']
+     ), getPresetSection(
+      "EssentialElements\\spacing_padding_all",
+      "Table padding",
+      "table_padding",
+       ['type' => 'popout']
+     ), c(
+        "space_between",
+        "Space between",
+        [],
+        ['type' => 'unit', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+      )],
         ['type' => 'section'],
         false,
         false,
@@ -166,6 +192,40 @@ class PostTable extends \Breakdance\Elements\Element
       "EssentialElements\\spacing_padding_y",
       "Row padding",
       "row_padding",
+       ['type' => 'popout']
+     )],
+        ['type' => 'section'],
+        false,
+        false,
+        [],
+      ), c(
+        "paginate_buttons",
+        "Paginate buttons",
+        [c(
+        "background",
+        "Background",
+        [],
+        ['type' => 'color', 'layout' => 'inline'],
+        false,
+        true,
+        [],
+      ), getPresetSection(
+      "EssentialElements\\typography_with_nothing",
+      "Typography",
+      "typography",
+       ['type' => 'popout']
+     ), c(
+        "color",
+        "Color",
+        [],
+        ['type' => 'color', 'layout' => 'inline'],
+        false,
+        true,
+        [],
+      ), getPresetSection(
+      "EssentialElements\\borders",
+      "Borders",
+      "borders",
        ['type' => 'popout']
      )],
         ['type' => 'section'],
@@ -265,6 +325,54 @@ class PostTable extends \Breakdance\Elements\Element
         false,
         false,
         [],
+      ), c(
+        "settings",
+        "Settings",
+        [c(
+        "show_pagination",
+        "Show pagination",
+        [],
+        ['type' => 'toggle', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+      ), c(
+        "order_switch",
+        "Order switch",
+        [],
+        ['type' => 'toggle', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+      ), c(
+        "search",
+        "Search",
+        [],
+        ['type' => 'toggle', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+      ), c(
+        "info",
+        "Info",
+        [],
+        ['type' => 'toggle', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+      ), c(
+        "language",
+        "Language",
+        [],
+        ['type' => 'dropdown', 'layout' => 'vertical', 'items' => ['0' => ['value' => 'pl', 'text' => 'Polish'], '1' => ['text' => 'English', 'value' => 'en-GB'], '2' => ['text' => 'German', 'value' => 'de-DE'], '3' => ['text' => 'Spanish', 'value' => 'es-ES']]],
+        false,
+        false,
+        [],
+      )],
+        ['type' => 'section', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
       )];
     }
 
@@ -275,11 +383,26 @@ class PostTable extends \Breakdance\Elements\Element
 
     static function dependencies()
     {
-        return ['0' =>  ['inlineScripts' => ['jQuery(document).ready(function($) {
+        return ['0' =>  ['inlineScripts' => ['// https://datatables.net/examples/advanced_init/language_file
+// https://datatables.net/plug-ins/i18n/
 
-        $(\'%%SELECTOR%% #myTable\').DataTable();
-        
+jQuery(document).ready(function($) {
+  let paging = Boolean(\'{{ content.settings.show_pagination }}\');
+  let ordering = Boolean(\'{{ content.settings.order_switch }}\');
+  let info = Boolean(\'{{ content.settings.info }}\');
+  let searching = Boolean(\'{{ content.settings.search }}\');
+  console.log(\'dep\')
+  var table = $(\'%%SELECTOR%% #myTable\').DataTable({
+      paging,
+      ordering,
+      info,
+      searching,
+      "language":  {
+            "url": datatablesajax[\'plugin_url\'] + "elements/Post_Table/lang/" + "{{ content.settings.language }}" + ".json"
+        }
   });
+        
+});
 '],],];
     }
 
@@ -297,11 +420,26 @@ class PostTable extends \Breakdance\Elements\Element
     {
         return [
 
-'onMountedElement' => [['script' => 'jQuery(document).ready(function($) {
+'onPropertyChange' => [['script' => '// https://datatables.net/examples/advanced_init/language_file
+// https://datatables.net/plug-ins/i18n/
 
-        $(\'%%SELECTOR%% #myTable\').DataTable();
-        
+jQuery(document).ready(function($) {
+  let paging = {{ content.settings.show_pagination }};
+  let ordering = {{ content.settings.order_switch }};
+  let info = {{ content.settings.info }};
+  let searching = {{ content.settings.search }};
+  table.destroy();
+  table = $(\'%%SELECTOR%% #myTable\').DataTable({
+      paging,
+      ordering,
+      info,
+      searching,
+      "language":  {
+            "url": datatablesajax[\'plugin_url\'] + "elements/Post_Table/lang/" + "{{ content.settings.language }}" + ".json"
+        }
   });
+        
+});
 ',
 ],],];
     }

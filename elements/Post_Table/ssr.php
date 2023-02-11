@@ -7,7 +7,7 @@ $show_actions = (bool) ($propertiesData['content']['post_table']['show_actions']
 
 $delete_button = in_array('delete', $propertiesData['content']['post_table']['action_buttons']);
 $edit_button = in_array('edit', $propertiesData['content']['post_table']['action_buttons']);
-fdump($propertiesData['design']);
+fdump($propertiesData['content']['settings']['show_pagination']);
 $view_button = in_array('view', $propertiesData['content']['post_table']['action_buttons']);
 $columns = $propertiesData['content']['post_table']['table_columns'];
 
@@ -16,7 +16,6 @@ $wp_query = new WP_Query(array(
     'posts_per_page' => $posts_per_page
 ));
 ?>
-
 <table id="myTable" class="display">
     <thead>
 

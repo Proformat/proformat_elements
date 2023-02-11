@@ -1,3 +1,12 @@
+
+
+{# Table #}
+%%SELECTOR%% .dataTable {
+  width: {{ design.table.width.style }};
+  {{ macros.borders(design.table.borders) }}
+  {{ macros.spacing_padding_all(design.table.table_padding) }}
+}
+
 {# Table HEAD #}
 
 %%SELECTOR%% th {
@@ -5,10 +14,26 @@
 }
 
 {# Table SURROUNDING #}
+%%SELECTOR%% .dataTables_length,
+%%SELECTOR%% .dataTables_filter
+{
+  padding-bottom: {{ design.table.space_between.style }};
+}
+
+%%SELECTOR%% .dataTables_info,
+%%SELECTOR%% .dataTables_paginate
+{
+  padding-top: {{ design.table.space_between.style }};
+}
+
+
+
+
 
 %%SELECTOR%% .dataTables_length,
 %%SELECTOR%% .dataTables_filter,
-%%SELECTOR%% .dataTables_info
+%%SELECTOR%% .dataTables_info,
+%%SELECTOR%% .dataTables_paginate a.paginate_button
 {
   {{ macros.typography(design.typography.text, globalSettings) }}
 }
@@ -42,29 +67,46 @@
 %%SELECTOR%% table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd,
 %%SELECTOR%% table.dataTable.display tbody tr.odd>.sorting_1
 {
-background-color: {{ design.table_row.odd_background }}
+  background-color: {{ design.table_row.odd_background }}
 }
 
 %%SELECTOR%% table.dataTable.stripe tbody tr.odd:hover, table.dataTable.display tbody tr.odd:hover,
 %%SELECTOR%% table.dataTable.display tbody tr.odd:hover>.sorting_1
 {
-background-color: {{ design.table_row.odd_background_hover }}
+  background-color: {{ design.table_row.odd_background_hover }}
 }
 
 %%SELECTOR%% table.dataTable.stripe tbody tr.even, table.dataTable.display tbody tr.even,
 %%SELECTOR%% table.dataTable.display tbody tr.even>.sorting_1
 {
-background-color: {{ design.table_row.even_background }}
+  background-color: {{ design.table_row.even_background }}
 }
 
 %%SELECTOR%% table.dataTable.stripe tbody tr.even:hover, table.dataTable.display tbody tr.even:hover,
 %%SELECTOR%% table.dataTable.display tbody tr.even:hover>.sorting_1
 {
-background-color: {{ design.table_row.even_background_hover }}
+  background-color: {{ design.table_row.even_background_hover }}
 }
 
 %%SELECTOR%% td {
   {{ macros.spacing_padding_y(design.table_row.row_padding) }}
 }
 
+
+{# Pagination #}
+
+%%SELECTOR%% .dataTables_paginate span a.paginate_button.current
+{
+  background: {{ design.paginate_buttons.background }};
+  color: {{ design.paginate_buttons.color }} !important;
+  {{ macros.typography(design.paginate_buttons.typography, globalSettings) }}
+  {{ macros.borders(design.paginate_buttons.borders) }}
+}
+
+%%SELECTOR%% .dataTables_paginate span:hover a.paginate_button.current
+{
+  background: {{ design.paginate_buttons.background_hover  }};
+  color: {{ design.paginate_buttons.color_hover }} !important;
+  {{ macros.typography(design.paginate_buttons.typography, globalSettings) }}
+}
 
