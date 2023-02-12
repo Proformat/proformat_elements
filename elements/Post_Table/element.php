@@ -420,26 +420,45 @@ jQuery(document).ready(function($) {
     {
         return [
 
-'onPropertyChange' => [['script' => '// https://datatables.net/examples/advanced_init/language_file
-// https://datatables.net/plug-ins/i18n/
-
-jQuery(document).ready(function($) {
-  let paging = {{ content.settings.show_pagination }};
-  let ordering = {{ content.settings.order_switch }};
-  let info = {{ content.settings.info }};
-  let searching = {{ content.settings.search }};
+'onPropertyChange' => [['script' => '
+  let paging = Boolean(\'{{ content.settings.show_pagination }}\');
+  let ordering = Boolean(\'{{ content.settings.order_switch }}\'); 
+  let info = Boolean(\'{{ content.settings.info }}\');
+  let searching = Boolean(\'{{ content.settings.search }}\');
+  
   table.destroy();
-  table = $(\'%%SELECTOR%% #myTable\').DataTable({
+
+  table = jQuery(\'%%SELECTOR%% #myTable\').DataTable({
       paging,
       ordering,
       info,
       searching,
       "language":  {
-            "url": datatablesajax[\'plugin_url\'] + "elements/Post_Table/lang/" + "{{ content.settings.language }}" + ".json"
+            "url": datatablesajax[\'plugin_url\'] + "elements/Post_Table/lang/" + "pl" + ".json"
         }
   });
         
-});
+
+',
+],],
+
+'onCreatedElement' => [['script' => '
+  let paging = Boolean(\'{{ content.settings.show_pagination }}\');
+  let ordering = Boolean(\'{{ content.settings.order_switch }}\'); 
+  let info = Boolean(\'{{ content.settings.info }}\');
+  let searching = Boolean(\'{{ content.settings.search }}\');
+
+  table = jQuery(\'%%SELECTOR%% #myTable\').DataTable({
+      paging,
+      ordering,
+      info,
+      searching,
+      "language":  {
+            "url": datatablesajax[\'plugin_url\'] + "elements/Post_Table/lang/" + "pl" + ".json"
+        }
+  });
+        
+
 ',
 ],],];
     }

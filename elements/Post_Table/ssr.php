@@ -4,10 +4,8 @@ $post_type     = (string) ($propertiesData['content']['post_table']['post_type']
 $posts_per_page = (int) ($propertiesData['content']['post_table']['posts_number'] ?? -1);
 $show_id = (bool) ($propertiesData['content']['post_table']['show_id_column'] ?? true);
 $show_actions = (bool) ($propertiesData['content']['post_table']['show_actions'] ?? false);
-
 $delete_button = in_array('delete', $propertiesData['content']['post_table']['action_buttons']);
 $edit_button = in_array('edit', $propertiesData['content']['post_table']['action_buttons']);
-fdump($propertiesData['content']['settings']['show_pagination']);
 $view_button = in_array('view', $propertiesData['content']['post_table']['action_buttons']);
 $columns = $propertiesData['content']['post_table']['table_columns'];
 
