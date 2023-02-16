@@ -4,15 +4,42 @@ $post_type     = (string) ($propertiesData['content']['post_table']['post_type']
 $posts_per_page = (int) ($propertiesData['content']['post_table']['posts_number'] ?? -1);
 $show_id = (bool) ($propertiesData['content']['post_table']['show_id_column'] ?? true);
 $show_actions = (bool) ($propertiesData['content']['post_table']['show_actions'] ?? false);
-$delete_button = in_array('delete', $propertiesData['content']['post_table']['action_buttons']);
-$edit_button = in_array('edit', $propertiesData['content']['post_table']['action_buttons']);
-$view_button = in_array('view', $propertiesData['content']['post_table']['action_buttons']);
-$columns = $propertiesData['content']['post_table']['table_columns'];
 
-$wp_query = new WP_Query(array(
+$action_buttons = $propertiesData['content']['post_table']['action_buttons'];
+
+$columns = $propertiesData['content']['post_table']['table_columns'];
+$order = $propertiesData['content']['post_table']['order'] ?? 'ASC';
+
+$args = [
     'post_type' => $post_type,
-    'posts_per_page' => $posts_per_page
-));
+    'posts_per_page' => $posts_per_page,
+    'order' => $order 
+];
+
+/* Order by */
+$order_by = $propertiesData['content']['post_table']['order_by'];
+$value_type = $propertiesData['content']['post_table']['value_type'];
+
+
+if (preg_match("/{.*}/", $order_by)) {
+    $property = substr(trim($order_by), 1, -1);
+    $args['orderby'] = $property;
+} elseif (str_contains(trim($order_by), 'mb')) {
+    $meta_key = trim($order_by, 'mb:');
+    $args['orderby'] = $value_type ?? 'meta_value';
+    $args['meta_key'] = $meta_key;
+} elseif (str_contains(trim($order_by), 'acf')) {
+    $meta_key = trim($order_by, 'acf:');
+    $args['orderby'] = $value_type ?? 'meta_value';
+    $args['meta_key'] = $meta_key;
+} else {
+    $args['orderby'] = 'date';
+}
+
+/* End order by */
+
+
+$wp_query = new WP_Query($args);
 ?>
 <table id="myTable" class="display">
     <thead>
@@ -52,16 +79,13 @@ $wp_query = new WP_Query(array(
                 <?php endforeach; ?>
                 <?php if ($show_actions) : ?>
                     <td>
-                        <?php if ($delete_button) : ?>
-                            <a href="<?= get_permalink() . '?action=delete' ?>" class="table_button--delete">Delete</a>
-                        <?php endif; ?>
-                        <?php if ($edit_button) : ?>
-                            <a href="<?= get_permalink() . '?action=edit' ?>" class="table_button--edit">Edit</a>
-                        <?php endif; ?>
-                        <?php if ($view_button) : ?>
-                            <a href="<?= get_permalink() . '?action=view' ?>" class="table_button--view">View</a>
-                        <?php endif; ?>
-
+                        <?php foreach($action_buttons as $button) : ?>
+                            <?php 
+                            $action = $button['action_name'] != '' ? '?action=' . $button['action_name'] : '';
+                            $class = $action ? 'table_button--' . $button['action_name'] : 'table_button--edit';      
+                            ?>
+                            <a href="<?= get_permalink() . $action ?>" class="<?= $class ?>"><?= $button['display_name']?></a>
+                        <?php endforeach; ?>
                     </td>
                 <?php endif; ?>
 

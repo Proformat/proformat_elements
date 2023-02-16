@@ -297,6 +297,38 @@ class PostTable extends \Breakdance\Elements\Element
         false,
         [],
       ), c(
+        "new_control",
+        "New Control",
+        [],
+        ['type' => 'alert_box', 'layout' => 'vertical', 'alertBoxOptions' => ['style' => 'default', 'content' => '<p>You can sort by:</p><ul><li><p>Post object properties: {ID}, {title}, {date}</p></li><li><p>Metabox: mb:fieldname</p></li><li><p>ACF: acf:fieldname</p></li></ul>']],
+        false,
+        false,
+        [],
+      ), c(
+        "order_by",
+        "Order by",
+        [],
+        ['type' => 'text', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+      ), c(
+        "order",
+        "Order",
+        [],
+        ['type' => 'button_bar', 'layout' => 'inline', 'items' => ['0' => ['value' => 'ASC', 'text' => 'ASC', 'icon' => 'ArrowUpIcon'], '1' => ['text' => 'DESC', 'value' => 'DESC', 'icon' => 'ArrowDownIcon']]],
+        false,
+        false,
+        [],
+      ), c(
+        "value_type",
+        "Value type",
+        [],
+        ['type' => 'dropdown', 'layout' => 'vertical', 'items' => ['0' => ['value' => 'meta_value_num', 'text' => 'Numberic '], '1' => ['text' => 'String', 'value' => 'meta_value']], 'condition' => ['0' => ['0' => ['path' => 'content.post_table.order_by', 'operand' => 'contains', 'value' => 'mb:']], '1' => ['0' => ['path' => 'content.post_table.order_by', 'operand' => 'contains', 'value' => 'acf:']]]],
+        false,
+        false,
+        [],
+      ), c(
         "show_id_column",
         "Show ID column",
         [],
@@ -315,8 +347,24 @@ class PostTable extends \Breakdance\Elements\Element
       ), c(
         "action_buttons",
         "Action buttons",
+        [c(
+        "display_name",
+        "Display name",
         [],
-        ['type' => 'multiselect', 'layout' => 'vertical', 'items' => ['0' => ['value' => 'delete', 'text' => 'Delete'], '1' => ['text' => 'Edit', 'value' => 'edit'], '2' => ['text' => 'View', 'value' => 'view']], 'condition' => ['0' => ['0' => ['path' => 'content.post_table.show_actions', 'operand' => 'is set', 'value' => '']]]],
+        ['type' => 'text', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+      ), c(
+        "action_name",
+        "Action name",
+        [],
+        ['type' => 'text', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+      )],
+        ['type' => 'repeater', 'layout' => 'vertical', 'items' => ['0' => ['value' => 'delete', 'text' => 'Delete'], '1' => ['text' => 'Edit', 'value' => 'edit'], '2' => ['text' => 'View', 'value' => 'view']], 'condition' => ['0' => ['0' => ['path' => 'content.post_table.show_actions', 'operand' => 'is set', 'value' => '']]]],
         false,
         false,
         [],
@@ -391,16 +439,16 @@ class PostTable extends \Breakdance\Elements\Element
 
     static function dependencies()
     {
-        return ['0' =>  ['inlineScripts' => ['// https://datatables.net/examples/advanced_init/language_file
-// https://datatables.net/plug-ins/i18n/
-
+        return ['0' =>  ['inlineScripts' => ['
 jQuery(document).ready(function($) {
   let paging = Boolean(\'{{ content.settings.show_pagination }}\');
   let ordering = Boolean(\'{{ content.settings.order_switch }}\');
   let info = Boolean(\'{{ content.settings.info }}\');
   let searching = Boolean(\'{{ content.settings.search }}\');
-  console.log(\'dep\')
   var table = $(\'%%SELECTOR%% #myTable\').DataTable({
+      columnDefs: [
+        { orderable: false, targets: -1 }
+      ],
       paging,
       ordering,
       info,
@@ -411,12 +459,12 @@ jQuery(document).ready(function($) {
   });
         
 });
-'],],];
+'],'scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/data-tables@1.3/datatables.min.js'],'styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/data-tables@1.3/datatables.min.css'],],];
     }
 
     static function settings()
     {
-        return false;
+        return ['dependsOnGlobalScripts' => false];
     }
 
     static function addPanelRules()
@@ -434,39 +482,32 @@ jQuery(document).ready(function($) {
   let info = Boolean(\'{{ content.settings.info }}\');
   let searching = Boolean(\'{{ content.settings.search }}\');
   
-  table.destroy();
+ 
 
-  table = jQuery(\'%%SELECTOR%% #myTable\').DataTable({
-      paging,
-      ordering,
-      info,
-      searching,
-      "language":  {
-            "url": datatablesajax[\'plugin_url\'] + "elements/Post_Table/lang/" + "pl" + ".json"
-        }
-  });
-        
+  
 
 ',
 ],],
 
-'onCreatedElement' => [['script' => '
+'onMountedElement' => [['script' => 'jQuery(document).ready(function($) {
   let paging = Boolean(\'{{ content.settings.show_pagination }}\');
-  let ordering = Boolean(\'{{ content.settings.order_switch }}\'); 
+  let ordering = Boolean(\'{{ content.settings.order_switch }}\');
   let info = Boolean(\'{{ content.settings.info }}\');
   let searching = Boolean(\'{{ content.settings.search }}\');
-
-  table = jQuery(\'%%SELECTOR%% #myTable\').DataTable({
+  var table = $(\'%%SELECTOR%% #myTable\').DataTable({
+      columnDefs: [
+        { orderable: false, targets: -1 }
+      ],
       paging,
       ordering,
       info,
       searching,
       "language":  {
-            "url": datatablesajax[\'plugin_url\'] + "elements/Post_Table/lang/" + "pl" + ".json"
+            "url": datatablesajax[\'plugin_url\'] + "elements/Post_Table/lang/" + "{{ content.settings.language }}" + ".json"
         }
   });
         
-
+});
 ',
 ],],];
     }
