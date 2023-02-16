@@ -200,7 +200,7 @@ class ReadMore extends \Breakdance\Elements\Element
 
     static function dependencies()
     {
-        return ['0' =>  ['inlineScripts' => ['new BreakdanceReadMore(\'%%SELECTOR%%\');'],'scripts' => ['https://gardens.pro-pages.com/wp-content/plugins/proformat-elements/elements/Read_more/assets/read-more.js'],],];
+        return ['0' =>  ['inlineScripts' => ['new BreakdanceReadMore(\'%%SELECTOR%%\');'],'scripts' => [PROFORMAT_ELEMENTS_PLUGIN_DIR . '/elements/Read_more/assets/read-more.js'],],];
     }
 
     static function settings()

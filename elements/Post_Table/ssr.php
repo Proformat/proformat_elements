@@ -53,13 +53,13 @@ $wp_query = new WP_Query(array(
                 <?php if ($show_actions) : ?>
                     <td>
                         <?php if ($delete_button) : ?>
-                            <button>Delete</button>
+                            <button class="table_button--delete">Delete</button>
                         <?php endif; ?>
                         <?php if ($edit_button) : ?>
-                            <button>Edit</button>
+                            <button class="table_button--edit">Edit</button>
                         <?php endif; ?>
                         <?php if ($view_button) : ?>
-                            <button>View</button>
+                            <button class="table_button--view">View</button>
                         <?php endif; ?>
 
                     </td>

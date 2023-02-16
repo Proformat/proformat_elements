@@ -19,7 +19,7 @@
 
       init() {
         this.rmButton.onclick = () => this.toggleClass()
-        this.rmButton.innerText = "Czytaj"
+        this.rmButton.querySelector('.button-atom__text').innerText = 'Czytaj';
         
       }
 
@@ -27,9 +27,9 @@
         this.expandedText.classList.toggle('is-active');
         this.isOpen = !this.isOpen;
         if(this.isOpen){
-          this.rmButton.innerText = "Zwiń"
+          this.rmButton.querySelector('.button-atom__text').innerText = 'Zwiń';
         } else {
-          this.rmButton.innerText = "Czytaj"
+          this.rmButton.querySelector('.button-atom__text').innerText = 'Czytaj';
         }
       }
     }
